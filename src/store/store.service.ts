@@ -92,6 +92,7 @@ export class StoreService {
   }
 
   remove(id: string) {
+    // validate if id exists
     this.findOne(id);
     if (this.stores.length === 1) {
       throw new BadRequestException(
