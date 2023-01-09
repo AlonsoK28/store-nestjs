@@ -1,9 +1,14 @@
 import { Module } from '@nestjs/common';
-import { StoreService } from './store.service';
+
+// controllers
 import { StoreController } from './store.controller';
+
+// services
+import { StoreService } from './store.service';
+import { IdGeneratorService } from 'src/id-generator/id-generator.service';
 
 @Module({
   controllers: [StoreController],
-  providers: [StoreService]
+  providers: [StoreService, IdGeneratorService],
 })
 export class StoreModule {}

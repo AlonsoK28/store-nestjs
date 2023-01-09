@@ -3,12 +3,21 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+
+// services
+import { IdGeneratorService } from 'src/id-generator/id-generator.service';
+
+// dtos
 import { CreateStoreDto } from './dto/create-store.dto';
 import { UpdateStoreDto } from './dto/update-store.dto';
+
+// entities
 import { Store } from './entities/store.entity';
 
 @Injectable()
 export class StoreService {
+  constructor(private readonly idGeneratorService: IdGeneratorService) {}
+
   private stores: Store[] = [
     {
       id: 1,
@@ -42,7 +51,7 @@ export class StoreService {
 
   create(createStoreDto: CreateStoreDto) {
     // move this to service
-    const getStoreId = Math.floor(Math.random() * (303 - 1 + 1) + 1);
+    const getStoreId = this.idGeneratorService.generateId();
     const store: Store = {
       id: getStoreId,
       name: createStoreDto.name.toLowerCase(),
