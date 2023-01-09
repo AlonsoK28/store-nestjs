@@ -3,9 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { StoreModule } from './store/store.module';
 import { IdGeneratorService } from './id-generator/id-generator.service';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
-  imports: [StoreModule],
+  imports: [StoreModule, SeedModule],
   controllers: [AppController],
   providers: [AppService, IdGeneratorService],
 })

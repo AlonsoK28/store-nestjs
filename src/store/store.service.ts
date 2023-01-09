@@ -18,36 +18,7 @@ import { Store } from './entities/store.entity';
 export class StoreService {
   constructor(private readonly idGeneratorService: IdGeneratorService) {}
 
-  private stores: Store[] = [
-    {
-      id: 1,
-      // category: 'Clothes',
-      name: 'adidas clothes méxico',
-      // country: 'México',
-      createdAt: Date.now(),
-    },
-    {
-      id: 2,
-      // category: 'Clothes',
-      name: 'sterilite méxico',
-      // country: 'México',
-      createdAt: Date.now(),
-    },
-    {
-      id: 3,
-      // category: 'Clothes',
-      name: 'amasón méxico',
-      // country: 'México',
-      createdAt: Date.now(),
-    },
-    {
-      id: 4,
-      // category: 'Clothes',
-      name: 'apple méxico',
-      // country: 'México',
-      createdAt: Date.now(),
-    },
-  ];
+  private stores: Store[] = [];
 
   create(createStoreDto: CreateStoreDto) {
     // move this to service
@@ -101,5 +72,9 @@ export class StoreService {
     } else {
       this.stores = this.stores.filter((el) => el.id.toString() !== id);
     }
+  }
+
+  fillStoresWithSeedData(stores: Store[]) {
+    this.stores = stores;
   }
 }

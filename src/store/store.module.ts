@@ -10,5 +10,6 @@ import { IdGeneratorService } from 'src/id-generator/id-generator.service';
 @Module({
   controllers: [StoreController],
   providers: [StoreService, IdGeneratorService],
+  exports: [StoreService],
 })
 export class StoreModule {}
