@@ -23,12 +23,21 @@ export class StoreService {
 
   private stores: Store[] = ExampleStoresSeed;
 
-  create(createStoreDto: CreateStoreDto) {
-    // move this to service
+  create(createStoreDto: CreateStoreDto): Store {
+    const currentName = createStoreDto.name.toLowerCase();
+    const alreadyExist = this.stores.some(
+      (el) => el.name.toLowerCase() === currentName,
+    );
+
+    if (alreadyExist)
+      throw new BadRequestException(
+        `Store with name '${currentName}' already exist`,
+      );
+
     const getStoreId = this.idGeneratorService.generateId();
     const store: Store = {
       id: getStoreId,
-      name: createStoreDto.name.toLowerCase(),
+      name: currentName,
       createdAt: new Date().getTime(),
     };
 
@@ -41,16 +50,16 @@ export class StoreService {
     return this.stores;
   }
 
-  findOne(id: string) {
+  findOne(id: string): Store {
     const result = this.stores.find((el) => el.id.toString() === id);
     if (!result) {
-      throw new NotFoundException(`Store with id: ${id} was not found`);
+      throw new NotFoundException(`Store with id '${id}' was not found`);
     } else {
       return result;
     }
   }
 
-  findManyByName(term: string) {
+  findManyByName(term: string): Store[] {
     const result = this.stores.filter((el) => {
       return el.name.includes(term.toLowerCase().trim());
     });
@@ -61,7 +70,7 @@ export class StoreService {
     }
   }
 
-  update(id: string, updateStoreDto: UpdateStoreDto) {
+  update(id: string, updateStoreDto: UpdateStoreDto): Store {
     let currentStore = this.findOne(id);
 
     this.stores = this.stores.map((el) => {
