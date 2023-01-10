@@ -4,6 +4,9 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 
+// data
+import { ExampleStoresSeed } from 'src/seed/data/example-stores.seed';
+
 // services
 import { IdGeneratorService } from 'src/services/id-generator/id-generator.service';
 
@@ -18,7 +21,7 @@ import { Store } from './entities/store.entity';
 export class StoreService {
   constructor(private readonly idGeneratorService: IdGeneratorService) {}
 
-  private stores: Store[] = [];
+  private stores: Store[] = ExampleStoresSeed;
 
   create(createStoreDto: CreateStoreDto) {
     // move this to service
