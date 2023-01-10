@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 
 // services
-import { IdGeneratorService } from 'src/id-generator/id-generator.service';
+import { IdGeneratorService } from 'src/services/id-generator/id-generator.service';
 
 // dtos
 import { CreateStoreDto } from './dto/create-store.dto';
