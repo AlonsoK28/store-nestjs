@@ -1,10 +1,13 @@
-// import { PartialType } from '@nestjs/mapped-types';
-import { IsString, MinLength } from 'class-validator';
-// import { CreateStoreDto } from './create-store.dto';
+import { PartialType } from '@nestjs/mapped-types';
 
-// export class UpdateStoreDto extends PartialType(CreateStoreDto) {}
-export class UpdateStoreDto {
-  @IsString()
-  @MinLength(3)
-  name: string;
+// validator
+import { IsBoolean, IsNotEmpty } from 'class-validator';
+
+// dtos
+import { CreateStoreDto } from './create-store.dto';
+
+export class UpdateStoreDto extends PartialType(CreateStoreDto) {
+  @IsNotEmpty()
+  @IsBoolean()
+  edited: boolean;
 }
