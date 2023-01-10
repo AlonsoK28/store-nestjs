@@ -55,7 +55,7 @@ export class StoreService {
       return el.name.includes(term.toLowerCase().trim());
     });
     if (result.length < 1) {
-      throw new NotFoundException(`Stores with term: ${term} was not found`);
+      throw new NotFoundException(`Stores with term '${term}' was not found`);
     } else {
       return result;
     }
