@@ -71,7 +71,17 @@ export class StoreService {
   }
 
   update(id: string, updateStoreDto: UpdateStoreDto): Store {
+    const currentName = updateStoreDto.name.toLowerCase();
     let currentStore = this.findOne(id);
+
+    const alreadyExist = this.stores.some(
+      (el) => el.name.toLowerCase() === currentName,
+    );
+
+    if (alreadyExist)
+      throw new BadRequestException(
+        `Store with name '${currentName}' already exist`,
+      );
 
     this.stores = this.stores.map((el) => {
       if (el.id.toString() === id) {
