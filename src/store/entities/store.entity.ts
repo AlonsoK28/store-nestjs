@@ -7,4 +7,5 @@ export class Store {
   createdAt: number;
   updatedAt?: number;
   edited?: boolean;
+  editedByUsername?: string;
 }
