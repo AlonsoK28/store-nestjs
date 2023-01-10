@@ -12,6 +12,9 @@ export class SeedService {
 
   populateWithExampleData() {
     this.storeService.fillStoresWithSeedData(ExampleStoresSeed);
-    return 'seed executed';
+    return {
+      ok: true,
+      message: "seed executed"
+    };
   }
 }
