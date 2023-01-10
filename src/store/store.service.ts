@@ -50,6 +50,17 @@ export class StoreService {
     }
   }
 
+  findManyByName(term: string) {
+    const result = this.stores.filter((el) => {
+      return el.name.includes(term.toLowerCase().trim());
+    });
+    if (result.length < 1) {
+      throw new NotFoundException(`Stores with term: ${term} was not found`);
+    } else {
+      return result;
+    }
+  }
+
   update(id: string, updateStoreDto: UpdateStoreDto) {
     let currentStore = this.findOne(id);
 

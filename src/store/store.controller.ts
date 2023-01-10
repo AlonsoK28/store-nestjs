@@ -30,6 +30,11 @@ export class StoreController {
     return this.storeService.findOne(id);
   }
 
+  @Get('found-by-name/:term')
+  findManyByName(@Param('term') term: string) {
+    return this.storeService.findManyByName(term);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateStoreDto: UpdateStoreDto) {
     return this.storeService.update(id, updateStoreDto);
