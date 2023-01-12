@@ -130,7 +130,7 @@ export class StoreService {
 
     return {
       ok: true,
-      message: `added ${createStoreDto.length} stores sucessfully`,
+      message: `Added ${createStoreDto.length} stores sucessfully`,
     };
   }
 }
