@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  ParseArrayPipe,
 } from '@nestjs/common';
 import { StoreService } from './store.service';
 import { CreateStoreDto } from './dto/create-store.dto';
@@ -43,5 +44,13 @@ export class StoreController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.storeService.remove(id);
+  }
+
+  @Post('create-stores-by-bulk')
+  createStoresByBulk(
+    @Body(new ParseArrayPipe({ items: CreateStoreDto }))
+    createStoreDto: CreateStoreDto[],
+  ) {
+    return this.storeService.createStoresByBulk(createStoreDto);
   }
 }

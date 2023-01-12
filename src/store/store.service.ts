@@ -110,4 +110,27 @@ export class StoreService {
   fillStoresWithSeedData(stores: Store[]) {
     this.stores = stores;
   }
+
+  createStoresByBulk(createStoreDto: CreateStoreDto[]) {
+    createStoreDto.forEach((el) => {
+      const currentName = el.name.toLowerCase();
+      const alreadyExistStoreName = this.stores.some((el) => {
+        return el.name.toLowerCase() == currentName;
+      });
+
+      if (alreadyExistStoreName)
+        throw new BadRequestException(
+          `Store with name '${currentName}' already exist`,
+        );
+    });
+
+    createStoreDto.forEach((el) => {
+      this.create(el);
+    });
+
+    return {
+      ok: true,
+      message: `added ${createStoreDto.length} stores sucessfully`,
+    };
+  }
 }
