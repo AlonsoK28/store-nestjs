@@ -25,11 +25,11 @@ export class StoreService {
 
   create(createStoreDto: CreateStoreDto): Store {
     const currentName = createStoreDto.name.toLowerCase();
-    const alreadyExist = this.stores.some(
-      (el) => el.name.toLowerCase() === currentName,
-    );
+    const alreadyExistStoreName = this.stores.some((el) => {
+      return el.name.toLowerCase() === currentName;
+    });
 
-    if (alreadyExist)
+    if (alreadyExistStoreName)
       throw new BadRequestException(
         `Store with name '${currentName}' already exist`,
       );
@@ -74,11 +74,11 @@ export class StoreService {
     const currentName = updateStoreDto.name.toLowerCase();
     let currentStore = this.findOne(id);
 
-    const alreadyExist = this.stores.some((el) => {
-      el.name.toLowerCase() === currentName;
+    const alreadyExistStoreName = this.stores.some((el) => {
+      return el.name.toLowerCase() === currentName && el.id.toString() != id;
     });
 
-    if (alreadyExist)
+    if (alreadyExistStoreName)
       throw new BadRequestException(
         `Store with name '${currentName}' already exist`,
       );
